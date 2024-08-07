@@ -108,10 +108,20 @@ jobs:
           ersilia -v api -i input.csv
           ersilia close
           
-      - name: Upload log output
+      - name: Create artifacts directory
+        if: always()
+        run: |
+          mkdir -p /home/runner/artifacts
+          cp /home/runner/eos/sessions/session_*/*.log /home/runner/artifacts/
+          cp -r /home/runner/eos/sessions/session_*/logs/ /home/runner/artifacts/
+          ls /home/runner/artifacts/
+      
+      - name: Upload artifacts
+        if: always()
         uses: actions/upload-artifact@83fd05a356d7e2593de66fc9913b3002723633cb #pin v3.1.1
         with:
-          name: debug-logs
-          retention-days: 1
-          path: /home/runner/eos/console.log
+          name: debug-artifacts
+          retention-days: 14
+          path: /home/runner/artifacts/
+
 

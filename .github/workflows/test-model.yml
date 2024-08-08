@@ -114,8 +114,8 @@ jobs:
           mkdir -p /home/runner/artifacts
           cp /home/runner/eos/sessions/session_*/*.log /home/runner/artifacts/
           mkdir -p /home/runner/artifacts/logs
-          find /home/runner/eos/sessions/session_*/logs/ -type l -exec cp --dereference {} /home/runner/artifacts/logs/ \;
-          find /home/runner/eos/sessions/session_*/logs/ -type f -exec cp {} /home/runner/artifacts/logs/ \;
+          find /home/runner/eos/sessions/session_*/logs/tmp -type l -exec cp --dereference {} /home/runner/artifacts/logs/ \;
+          find /home/runner/eos/sessions/session_*/logs/tmp -type f -exec cp {} /home/runner/artifacts/logs/ \;
           cd /home/runner/artifacts/
           zip -r logs.zip logs
           ls /home/runner/artifacts/
